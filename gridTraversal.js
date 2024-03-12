@@ -11,10 +11,12 @@ const gridTravel = (m, n, memo = {}) => {
   if ((m === 2 && n === 3) || (m === 3 && n === 2)) return 3;
 
   let value = gridTravel(m - 1, n, memo) + gridTravel(m, n - 1, memo);
-
-  memo[m + "," + n] = value;
-  memo[n + "," + m] = value;
-
+  if (m === n) {
+    memo[m + "," + n] = value;
+  } else {
+    memo[m + "," + n] = value;
+    memo[n + "," + m] = value;
+  }
   //console.log(memo);
   return memo[m + "," + n];
 };
