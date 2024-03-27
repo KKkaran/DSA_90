@@ -1,18 +1,18 @@
-const howSum = (target, nums, solArr = []) => {
-  if (target === 0) return { res: true, data: solArr };
-  if (target < 0) return { res: false, data: [] };
+const howSum = (target, nums) => {
+  if (target < 0) return null;
+  if (target === 0) return [];
 
   for (let x of nums) {
-    const arr = [];
-    const newTarget = target - x;
-    solArr.push(x);
-    const { res, data } = howSum(newTarget, nums, arr);
-    if (res) {
-      return data;
-    }//
+    //console.log(x)
+    let newTarget = target - x;
+    const result = howSum(newTarget, nums);
+    //console.log(newTarget, x, result)
+    if (result !== null) {
+      return [...result, x];
+    }
   }
 
-  return { res: false, data: [] };
+  return null
 };
 
-console.log(howSum(9, [5, 3, 4, 7]));
+console.log(howSum(10, [3, 4, 5, 7])); // [3,4] ,[7]
