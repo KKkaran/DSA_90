@@ -28,4 +28,4 @@ const getCommonPrefix = (arrStrings = []) => {
     return prefix;
 };
 
-console.log(getCommonPrefix(["flower", "flow", "flowet"]));
+console.log(getCommonPrefix(["flower", "flow", "floet"]));
