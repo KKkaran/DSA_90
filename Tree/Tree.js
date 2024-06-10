@@ -20,8 +20,8 @@ root.right = coldDrinks;
 hotDrinks.left = tea;
 hotDrinks.right = coffee;
 coldDrinks.left = roohafza;
-roohafza.right = roohafzaB;
-coldDrinks.right = thandai;
+//roohafza.right = roohafzaB;
+//coldDrinks.right = thandai;
 
 const pre_order_iteration = (root) => {
   if (root === null) return;
@@ -64,7 +64,7 @@ const post_order_traversal = (root) => {
 //post_order_traversal(root)
 
 const levelOrder_BFS = (root) => {
-    if(root === null)return
+  if (root === null) return;
   const queue = [root];
   while (queue.length > 0) {
     const popped = queue.pop();
@@ -74,4 +74,36 @@ const levelOrder_BFS = (root) => {
   }
 };
 
-levelOrder_BFS(root);
+const calcLeftHeightOfTree = (root) => {
+  if (root === null) return 0;
+  let counter = 1;
+  while (root !== null) {
+    counter++;
+    root = root.left;
+  }
+  return counter;
+};
+const calcRightHeightOfTree = (root) => {
+  if (root === null) return 0;
+  let counter = 1;
+  while (root !== null) {
+    counter++;
+    root = root.right;
+  }
+  return counter;
+};
+
+const countNode = (root) => {
+  if (root === null) return 0;
+  if (!root.left && !root.right) return 1;
+  const lefNodeCount = calcLeftHeightOfTree(root.left);
+  const rightNodeCount = calcRightHeightOfTree(root.right);
+  if (lefNodeCount === rightNodeCount) {
+    return Math.pow(2, lefNodeCount) - 1; //happy path
+  } else {
+    return 1 + countNode(root.left) + countNode(root.right); //full binary trr, use recursion to go one level deeper
+  }
+};
+
+//levelOrder_BFS(root);
+console.log(countNode(root));
