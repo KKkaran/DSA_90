@@ -26,7 +26,7 @@ const node4 = new LinkedListNode(1); //head
 
 node4.next = node5;
 node5.next = node6;
-
+ 
 // printLL(node1);
 // printLL(node4);
 
