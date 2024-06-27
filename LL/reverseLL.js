@@ -28,42 +28,32 @@ const printLL = (root) => {
 };
 
 const reverseLL2 = (head, l, r) => {
-  if (head === null) return null;
-
-  let current = head;
-  let counter = 1;
-  let left = null;
-  let right = null;
-
-  while (current != null) {
-    if (counter > r) break;
-    if (counter === l) {
-      left = current;
+    if (head === null || l === r) return head;
+    const dummy = new LinkedListNode(0, head);
+    
+    let leftPrev = dummy;
+    let current = head
+    for (let i = 0; i < l - 1; i++) {
+        leftPrev = current;
+        current = current.next
     }
-    if (counter === r - 1) {
-      right = current.next;
-      let temp2 = null;
-      let temp1 = null;
-      if (current.next.next) {
-        temp2 = current.next.next;
-      }
-      temp1 = left.next;
-      current.next = left;
-      left.next = temp2;
-      right.next = temp1;
-      if (l === 1) {
-        head = right;
-      }
+
+    //lets reverse the nodes from here
+    prev = null;
+    for (let i = 0; i < r - l + 1; i++){
+        temp = current.next
+        current.next = prev
+        prev = current
+        current = temp
     }
-      current = current.next;
-      counter++
-  }
-  return head;
+
+    //arrange pointer
+    leftPrev.next.next = current
+    leftPrev.next = prev;
+    return dummy.next
 };
 
-
-printLL(reverseLL2(node1, 1,2))
-
+printLL(reverseLL2(node1, 1, 2));
 
 const reverseLL = (head) => {
   if (head === null) return null;
